@@ -48,3 +48,8 @@ src/cuda/shoc-master/doc/*.out
 src/cuda/shoc-master/doc/*.fdb_latexmk
 src/cuda/shoc-master/doc/*.fls
 src/cuda/shoc-master/doc/*.synctex.gz
+
+# Flash attention compiled artifacts (too large for GitHub)
+flash_attention/*.so
+flash_attention/*.sass
+flash_attention/cubin/
