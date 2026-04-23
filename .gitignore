@@ -17,3 +17,34 @@ src/cuda/rodinia/3.1/cuda/pathfinder/pathfinder
 .venv/
 __pycache__/
 flash_attention/flash_attn_2_cuda.sass
+
+# ---- Migration prep (2026-04-23) ----
+# 嵌套独立 git 仓库
+cuTest/
+gardenia/
+
+# 编译产物（GPU microbenchmarks）
+src/cuda/GPU_Microbenchmark/ubench/**/atomic_add_*
+src/cuda/GPU_Microbenchmark/ubench/**/MaxFlops_*
+src/cuda/GPU_Microbenchmark/ubench/**/MaxIops_*
+src/cuda/GPU_Microbenchmark/ubench/**/config_*
+src/cuda/GPU_Microbenchmark/ubench/**/core_config
+src/cuda/GPU_Microbenchmark/ubench/**/lat_*
+src/cuda/GPU_Microbenchmark/ubench/**/sfu_*
+src/cuda/GPU_Microbenchmark/ubench/**/mem_bw
+src/cuda/GPU_Microbenchmark/ubench/**/spinlock_*
+
+# 编译产物（其它）
+src/cuda/lonestargpu-2.0/apps/pta/pta
+src/cuda/pannotia/color/color_max
+src/cuda/pannotia/mis/mis
+src/cuda/pannotia/mis/result.out
+src/cuda/flashinfer_decode/flashinfer_decode_*
+
+# LaTeX 构建产物
+src/cuda/shoc-master/doc/*.aux
+src/cuda/shoc-master/doc/*.log
+src/cuda/shoc-master/doc/*.out
+src/cuda/shoc-master/doc/*.fdb_latexmk
+src/cuda/shoc-master/doc/*.fls
+src/cuda/shoc-master/doc/*.synctex.gz
