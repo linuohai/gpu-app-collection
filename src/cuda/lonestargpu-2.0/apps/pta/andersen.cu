@@ -2457,14 +2457,14 @@ __host__ void buildHashMap(thrust::device_vector<uint>& key, thrust::device_vect
      make_transform_iterator(
         thrust::make_zip_iterator(thrust::make_tuple(
           make_transform_iterator(
-              make_zip_iterator(make_tuple(key.begin() + 1, key.begin())), 
-              neqAdapter()), 
-          thrust::counting_iterator<uint>(1))), 
+              make_zip_iterator(thrust::make_tuple(key.begin() + 1, key.begin())),
+              neqAdapter()),
+          thrust::counting_iterator<uint>(1))),
         mulAdapter()),
      make_transform_iterator(
          make_zip_iterator(thrust::make_tuple(
              make_transform_iterator(
-                 make_zip_iterator(make_tuple(key.begin() + size, key.begin() + size - 1)), 
+                 make_zip_iterator(thrust::make_tuple(key.begin() + size, key.begin() + size - 1)), 
                  neqAdapter()), 
           thrust::counting_iterator<uint>(1))), 
          mulAdapter()), key.begin() + 1, uintMax);  

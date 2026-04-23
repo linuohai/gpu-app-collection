@@ -4,7 +4,7 @@ $(error You must run "source setup_environment before calling make")
 endif
 
 ifeq ($(CUDA_GT_7), 1)
-all:  GPU_Microbenchmark microbench rodinia_2.0-ft cutlass rodinia-3.1 pannotia proxy-apps ispass-2009 lonestargpu-2.0 polybench custom_apps heterosync cuda_samples mlperf_inference vllm huggingface # mlperf_training
+all:  GPU_Microbenchmark microbench rodinia_2.0-ft cutlass rodinia-3.1 pannotia proxy-apps ispass-2009 lonestargpu-2.0 polybench custom_apps heterosync cuda_samples mlperf_inference vllm huggingface flashinfer_decode # mlperf_training
 else
 ifeq ($(CUDA_GT_4), 1)
 all:   pannotia rodinia_2.0-ft proxy-apps dragon-naive microbench rodinia-3.1 ispass-2009 dragon-cdp lonestargpu-2.0 polybench parboil shoc custom_apps
@@ -417,6 +417,7 @@ custom_apps:
 #   $(SETENV) make $(MAKE_ARGS) noinline=$(noinline) -C cuda/custom-apps/shoc-modified-spmv/
 #	$(SETENV) make $(MAKE_ARGS) noinline=$(noinline) -C cuda/custom-apps/rodinia-kmn-no-tex/
 	$(SETENV) make $(MAKE_ARGS) noinline=$(noinline) -C cuda/custom-apps/sdk-matrixMul-modified/
+	$(SETENV) make $(MAKE_ARGS) noinline=$(noinline) -C cuda/custom-apps/ima_tiny_case/
 
 accelwattch_ubench:
 	$(SETENV) make $(MAKE_ARGS) noinline=$(noinline) -C cuda/accelwattch-ubench/ power
@@ -488,6 +489,9 @@ vllm:
 	cp cuda/vllm/througput.sh $(BINDIR)/$(BINSUBDIR)/vllm
 	# cd $(BINDIR)/$(BINSUBDIR)/vllm && sh ./install_vllm.sh | tee $(BINDIR)/$(BINSUBDIR)/vllm/vllm_install.log
 
+flashinfer_decode:
+	$(SETENV) make $(MAKE_ARGS) -C cuda/flashinfer_decode
+
 
 mlperf_training:
 	mkdir -p $(BINDIR)/$(BINSUBDIR)/
@@ -533,6 +537,7 @@ clean_custom_apps:
 #   make clean -C cuda/custom-apps/shoc-modified-spmv/
 	make clean -C cuda/custom-apps/rodinia-kmn-no-tex/
 	make clean -C cuda/custom-apps/sdk-matrixMul-modified/
+	make clean -C cuda/custom-apps/ima_tiny_case/
 
 clean_shoc:
 	cd cuda/shoc-master/; make clean; make distclean

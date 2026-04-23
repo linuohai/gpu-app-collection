@@ -121,7 +121,8 @@ csr_array *parseMetis(char* tmpchar, int *p_num_nodes, int *p_num_edges, bool di
 
     int cnt = 0;
     unsigned int lineno = 0;
-    char *line = (char *)malloc(8192);
+    int line_buf_size = 1048576;  // 1 MB — handles high-degree vertices
+    char *line = (char *)malloc(line_buf_size);
     int num_edges = 0, num_nodes = 0;
 
     FILE *fptr;
@@ -135,7 +136,7 @@ csr_array *parseMetis(char* tmpchar, int *p_num_nodes, int *p_num_edges, bool di
 
     printf("Opening file: %s\n", tmpchar);
 
-    while (fgets(line, 8192, fptr)) {
+    while (fgets(line, line_buf_size, fptr)) {
         int head, tail, weight = 0;
         CooTuple temp;
 
@@ -645,7 +646,8 @@ csr_array *parseMetis_transpose(char* tmpchar, int *p_num_nodes, int *p_num_edge
 {
     int cnt = 0;
     unsigned int lineno = 0;
-    char *line = (char *)malloc(8192);
+    int line_buf_size = 1048576;  // 1 MB — handles high-degree vertices
+    char *line = (char *)malloc(line_buf_size);
     int num_edges = 0, num_nodes = 0;
     int *col_cnt = NULL;
 
@@ -659,7 +661,7 @@ csr_array *parseMetis_transpose(char* tmpchar, int *p_num_nodes, int *p_num_edge
     }
 
     printf("Opening file: %s\n", tmpchar);
-    while (fgets(line, 8192, fptr)) {
+    while (fgets(line, line_buf_size, fptr)) {
         int head, tail, weight = 0;
         CooTuple temp;
 
